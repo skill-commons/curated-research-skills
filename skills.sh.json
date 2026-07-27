@@ -1,0 +1,47 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "General",
+      "description": "Literature discovery, monitoring, and scientific calculation.",
+      "skills": [
+        "arxiv",
+        "calculator"
+      ]
+    },
+    {
+      "title": "LaTeX",
+      "description": "Research-manuscript authoring, revision, compilation, and submission packaging.",
+      "skills": [
+        "latex-journal-submission-package",
+        "latex-research-paper"
+      ]
+    },
+    {
+      "title": "Astronomy",
+      "description": "Astronomy catalog access, survey workflows, and scientific visualization.",
+      "skills": [
+        "astro-catalog-plotting-cache",
+        "gaia-dr3-tap-query",
+        "rave-dr6",
+        "starhorse-access",
+        "tap-pyvo-adql-access"
+      ]
+    },
+    {
+      "title": "Data",
+      "description": "Reproducible access to large research datasets and object storage.",
+      "skills": [
+        "data-aip-de-s3"
+      ]
+    },
+    {
+      "title": "Visualization",
+      "description": "General-purpose publication and report graphics.",
+      "skills": [
+        "seaborn-paper-plots"
+      ]
+    }
+  ]
+}
