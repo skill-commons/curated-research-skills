@@ -41,6 +41,7 @@ CATEGORIES = {
 
 REQUIRED_FIELDS = ("name", "description", "version", "author", "license")
 FORBIDDEN_PACKAGE_FILES = {"research-skill.yaml", "research-skill.lock"}
+SUPPORT_DIRECTORIES = {"references", "templates", "scripts", "assets", "examples"}
 MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 
 
@@ -59,6 +60,7 @@ def _frontmatter(path: Path) -> dict[str, Any]:
 
 
 def _validate_links(skill_dir: Path) -> None:
+    skill_text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
     for markdown in skill_dir.rglob("*.md"):
         for target in MARKDOWN_LINK_RE.findall(markdown.read_text(encoding="utf-8")):
             target = target.strip().strip("<>")
@@ -67,6 +69,13 @@ def _validate_links(skill_dir: Path) -> None:
             relative = target.split("#", 1)[0]
             if relative and not (markdown.parent / relative).resolve().is_file():
                 raise ValueError(f"{markdown}: broken relative link {target!r}")
+    for path in skill_dir.rglob("*"):
+        if (
+            path.is_file()
+            and path.relative_to(skill_dir).parts[0] in SUPPORT_DIRECTORIES
+            and path.relative_to(skill_dir).as_posix() not in skill_text
+        ):
+            raise ValueError(f"{skill_dir / 'SKILL.md'}: support file is not referenced: {path}")
 
 
 def load_skills(root: Path = SKILLS_ROOT) -> list[dict[str, Any]]:
