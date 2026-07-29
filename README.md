@@ -24,12 +24,13 @@ hermes skills install skill-commons/curated-research-skills/skills/tap-pyvo-adql
 
 ### General
 
-Literature discovery, monitoring, and scientific calculation.
+Literature discovery, evidence synthesis, monitoring, and scientific calculation.
 
 | Skill | Version | Description |
 |---|---:|---|
 | [`arxiv`](skills/arxiv/) | `2.0.0` | Search, read, cite, and monitor papers through arXiv. |
 | [`calculator`](skills/calculator/) | `1.0.1` | Perform exact symbolic and numerical calculations. |
+| [`research-paper-evidence-workflow`](skills/research-paper-evidence-workflow/) | `1.0.0` | Map research-paper claims to supplied evidence, synthesize completed results, construct an evidence-backed outline, and audit a draft for traceability, numeric fidelity, scope, and overclaiming. Use when notes, tables, figures, result files, or a manuscript need a claim-evidence matrix, results narrative, outline, or evidence-focused review. Do not use to design or run experiments, retrieve citations, format or compile LaTeX, manage projects, submit or promote papers, or perform external writes. |
 | [`rss-feed-monitor`](skills/rss-feed-monitor/) | `2.0.0` | Track public RSS or Atom feeds in an isolated local database, scan for new articles, and manage read state with explicit mutation safeguards. |
 
 ### LaTeX
@@ -77,6 +78,7 @@ Simulation, validation, and reproducible scientific software workflows.
 | Skill | Version | Description |
 |---|---:|---|
 | [`dt4acc-host-smoke-test`](skills/dt4acc-host-smoke-test/) | `2.0.0` | Run a bounded, simulation-only host smoke test for local dt4acc, dt4acc-lib, and lat2db checkouts without facility services or containers. |
+| [`reana-workflow-authoring`](skills/reana-workflow-authoring/) | `1.0.0` | Scaffold, edit, and conservatively validate provider-neutral local REANA Serial workflow projects, including reana.yaml structure, declared inputs and outputs, runtime-image reproducibility, path containment, symlinks, and accidental secrets. Use when a user asks to create or review a local REANA workflow definition before operational handoff. This skill never authenticates, contacts a REANA server or registry, uploads, submits, starts, monitors, downloads, or mutates a remote workflow. |
 
 ### Software Development
 

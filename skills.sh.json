@@ -4,10 +4,11 @@
   "groupings": [
     {
       "title": "General",
-      "description": "Literature discovery, monitoring, and scientific calculation.",
+      "description": "Literature discovery, evidence synthesis, monitoring, and scientific calculation.",
       "skills": [
         "arxiv",
         "calculator",
+        "research-paper-evidence-workflow",
         "rss-feed-monitor"
       ]
     },
@@ -49,7 +50,8 @@
       "title": "Scientific Computing",
       "description": "Simulation, validation, and reproducible scientific software workflows.",
       "skills": [
-        "dt4acc-host-smoke-test"
+        "dt4acc-host-smoke-test",
+        "reana-workflow-authoring"
       ]
     },
     {
