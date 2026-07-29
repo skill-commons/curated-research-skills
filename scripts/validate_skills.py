@@ -19,7 +19,7 @@ SKILLS_SH = ROOT / "skills.sh.json"
 CATEGORIES = {
     "general": (
         "General",
-        "Literature discovery, monitoring, and scientific calculation.",
+        "Literature discovery, evidence synthesis, monitoring, and scientific calculation.",
     ),
     "latex": (
         "LaTeX",

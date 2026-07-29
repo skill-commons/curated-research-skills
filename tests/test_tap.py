@@ -25,9 +25,9 @@ def _load_dt4acc_runner():
     return module
 
 
-def test_tap_contains_the_fifteen_curated_skills() -> None:
+def test_tap_contains_the_seventeen_curated_skills() -> None:
     records = load_skills()
-    assert len(records) == 15
+    assert len(records) == 17
     assert {record["name"] for record in records} == {
         "arxiv",
         "astro-catalog-plotting-cache",
@@ -40,6 +40,8 @@ def test_tap_contains_the_fifteen_curated_skills() -> None:
         "latex-research-paper",
         "python-library-docs-first",
         "rave-dr6",
+        "reana-workflow-authoring",
+        "research-paper-evidence-workflow",
         "rss-feed-monitor",
         "seaborn-paper-plots",
         "starhorse-access",
