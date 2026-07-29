@@ -30,6 +30,7 @@ Literature discovery, monitoring, and scientific calculation.
 |---|---:|---|
 | [`arxiv`](skills/arxiv/) | `2.0.0` | Search, read, cite, and monitor papers through arXiv. |
 | [`calculator`](skills/calculator/) | `1.0.1` | Perform exact symbolic and numerical calculations. |
+| [`rss-feed-monitor`](skills/rss-feed-monitor/) | `2.0.0` | Track public RSS or Atom feeds in an isolated local database, scan for new articles, and manage read state with explicit mutation safeguards. |
 
 ### LaTeX
 
@@ -66,7 +67,24 @@ General-purpose publication and report graphics.
 
 | Skill | Version | Description |
 |---|---:|---|
+| [`large-tabular-visualization`](skills/large-tabular-visualization/) | `2.0.0` | Build interpretable interactive or static visualizations from tabular data that is too dense or too large for ordinary point plotting. |
 | [`seaborn-paper-plots`](skills/seaborn-paper-plots/) | `1.0.1` | Create reproducible publication plots with Seaborn. |
+
+### Scientific Computing
+
+Simulation, validation, and reproducible scientific software workflows.
+
+| Skill | Version | Description |
+|---|---:|---|
+| [`dt4acc-host-smoke-test`](skills/dt4acc-host-smoke-test/) | `2.0.0` | Run a bounded, simulation-only host smoke test for local dt4acc, dt4acc-lib, and lat2db checkouts without facility services or containers. |
+
+### Software Development
+
+Documentation-grounded software development and library workflows.
+
+| Skill | Version | Description |
+|---|---:|---|
+| [`python-library-docs-first`](skills/python-library-docs-first/) | `2.0.0` | Verify version-sensitive third-party Python APIs against authoritative documentation before writing, reviewing, fixing, or explaining code. |
 
 Attribution and consolidation history are recorded in [`PROVENANCE.md`](PROVENANCE.md).
 

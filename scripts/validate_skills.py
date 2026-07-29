@@ -37,6 +37,14 @@ CATEGORIES = {
         "Visualization",
         "General-purpose publication and report graphics.",
     ),
+    "scientific-computing": (
+        "Scientific Computing",
+        "Simulation, validation, and reproducible scientific software workflows.",
+    ),
+    "software-development": (
+        "Software Development",
+        "Documentation-grounded software development and library workflows.",
+    ),
 }
 
 REQUIRED_FIELDS = ("name", "description", "version", "author", "license")

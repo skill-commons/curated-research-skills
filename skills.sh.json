@@ -7,7 +7,8 @@
       "description": "Literature discovery, monitoring, and scientific calculation.",
       "skills": [
         "arxiv",
-        "calculator"
+        "calculator",
+        "rss-feed-monitor"
       ]
     },
     {
@@ -40,7 +41,22 @@
       "title": "Visualization",
       "description": "General-purpose publication and report graphics.",
       "skills": [
+        "large-tabular-visualization",
         "seaborn-paper-plots"
+      ]
+    },
+    {
+      "title": "Scientific Computing",
+      "description": "Simulation, validation, and reproducible scientific software workflows.",
+      "skills": [
+        "dt4acc-host-smoke-test"
+      ]
+    },
+    {
+      "title": "Software Development",
+      "description": "Documentation-grounded software development and library workflows.",
+      "skills": [
+        "python-library-docs-first"
       ]
     }
   ]
