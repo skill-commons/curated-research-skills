@@ -18,8 +18,15 @@ historical origins; they are not writable mirrors of this tap.
 | `astro-catalog-plotting-cache` | [`arm2arm/AstroAgentAssistant`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/astronomy/astro-catalog-plotting-cache) | CMD, Datashader, Gaia/dust, and RAVE presentation variants |
 | `data-aip-de-s3` | [`arm2arm/AstroAgentAssistant`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/astronomy/data-aip-de-s3) | HDF5 and Parquet/S3 variants |
 | `seaborn-paper-plots` | [`arm2arm/AstroAgentAssistant`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/python/seaborn-paper-plots) | — |
+| `large-tabular-visualization` | [`arm2arm/AstroAgentAssistant`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/python/dask-hvplot-datashader-scientific-plots) | `dask-hvplot-datashader-scientific-plots` |
+| `rss-feed-monitor` | [`arm2arm/AstroAgentAssistant`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/research/blogwatcher); [`JulienTant/blogwatcher-cli`](https://github.com/JulienTant/blogwatcher-cli/tree/8d18c6e70ac2812987d2b6fb10bd63d83c460f47) | `blogwatcher`; command contract exercised with v0.2.1 |
+| `dt4acc-host-smoke-test` | [`arm2arm/AstroAgentAssistant`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/science/dtwin-host-smoke-test) | `dtwin-host-smoke-test`; rewritten as simulation-only |
+| `python-library-docs-first` | [`python-mcp-docs-first`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/software-development/python-mcp-docs-first); [`dask-mcp-docs-first`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/software-development/dask-mcp-docs-first); [`pandas-datashader-mcp-docs-first`](https://github.com/arm2arm/AstroAgentAssistant/tree/16b4fa2cfd3c5b6b674a750efc7b39a183b416cb/software-development/pandas-datashader-mcp-docs-first) | Three provider-bound skills consolidated into one provider-neutral workflow |
 
 Git history in [`skill-commons/skill-commons`](https://github.com/skill-commons/skill-commons)
 preserves the earlier Commons materializations, publication sidecars, and consolidation
 decisions.
 
+Pinned source links document the historical input reviewed during consolidation. New
+maintenance happens in this repository; upstream changes are adopted deliberately through
+review rather than copied or synchronized automatically.
