@@ -11,13 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _load_dt4acc_runner():
-    path = (
-        ROOT
-        / "skills"
-        / "dt4acc-host-smoke-test"
-        / "scripts"
-        / "dt4acc_host_smoke_test.py"
-    )
+    path = ROOT / "skills" / "dt4acc-host-smoke-test" / "scripts" / "dt4acc_host_smoke_test.py"
     spec = importlib.util.spec_from_file_location("crs_dt4acc_smoke_runner", path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -68,9 +62,7 @@ def test_commons_publication_sidecars_are_not_in_the_tap() -> None:
 
 
 def test_docs_first_core_is_provider_neutral() -> None:
-    core = (
-        ROOT / "skills" / "python-library-docs-first" / "SKILL.md"
-    ).read_text(encoding="utf-8")
+    core = (ROOT / "skills" / "python-library-docs-first" / "SKILL.md").read_text(encoding="utf-8")
     for provider_detail in (
         "aip.de",
         "mcp_docs_",
@@ -99,11 +91,7 @@ def test_dt4acc_runner_rejects_output_inside_checkouts(tmp_path: Path) -> None:
 
 def test_dt4acc_wrapper_is_syntax_valid_and_install_free() -> None:
     wrapper = (
-        ROOT
-        / "skills"
-        / "dt4acc-host-smoke-test"
-        / "scripts"
-        / "run_dt4acc_host_smoke_test.sh"
+        ROOT / "skills" / "dt4acc-host-smoke-test" / "scripts" / "run_dt4acc_host_smoke_test.sh"
     )
     subprocess.run(["bash", "-n", str(wrapper)], check=True)
     text = wrapper.read_text(encoding="utf-8")
