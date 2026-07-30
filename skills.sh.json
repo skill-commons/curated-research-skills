@@ -35,7 +35,8 @@
       "title": "Data",
       "description": "Reproducible access to large research datasets and object storage.",
       "skills": [
-        "data-aip-de-s3"
+        "data-aip-de-s3",
+        "drphub-products"
       ]
     },
     {
@@ -51,6 +52,8 @@
       "description": "Simulation, validation, and reproducible scientific software workflows.",
       "skills": [
         "dt4acc-host-smoke-test",
+        "dt4acc-operations",
+        "reana-operator",
         "reana-workflow-authoring"
       ]
     },

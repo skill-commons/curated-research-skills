@@ -61,6 +61,7 @@ Reproducible access to large research datasets and object storage.
 | Skill | Version | Description |
 |---|---:|---|
 | [`data-aip-de-s3`](skills/data-aip-de-s3/) | `2.0.0` | Access and cache research data from S3-compatible stores. |
+| [`drphub-products`](skills/drphub-products/) | `1.0.0` | Inspect Digital Research Product Hub health, API capabilities, product summaries, maturity, and lineage through a bounded read-only REST client. Use when a user needs to diagnose a DRP Hub endpoint, search or inspect products, verify immutable Git and image identities, or review maturity and clone relationships without creating, changing, publishing, sharing, reviewing, or deleting remote data. |
 
 ### Visualization
 
@@ -78,6 +79,8 @@ Simulation, validation, and reproducible scientific software workflows.
 | Skill | Version | Description |
 |---|---:|---|
 | [`dt4acc-host-smoke-test`](skills/dt4acc-host-smoke-test/) | `2.0.0` | Run a bounded, simulation-only host smoke test for local dt4acc, dt4acc-lib, and lat2db checkouts without facility services or containers. |
+| [`dt4acc-operations`](skills/dt4acc-operations/) | `1.0.0` | Preflight, plan, start, inspect, and stop a local dt4acc simulation packaged as an already-built, digest-pinned Apptainer SIF. Use when an operator needs a bounded simulation IOC lifecycle with exact source/build provenance, a clean child environment, no host or facility network, content-bound start/stop confirmation, and exact owned-process cleanup. This first CRS version never builds or pulls images, connects to facility services, accesses live PVs, imports MongoDB data, or performs PV writes. |
+| [`reana-operator`](skills/reana-operator/) | `1.0.0` | Inspect an authenticated REANA service through a fixed read-only command allowlist, including connectivity, cluster information, workflow inventory, status, redacted logs, workspace files, and disk usage. Use when a user wants to diagnose or review remote REANA state after a local workflow has been authored. This first CRS version never uploads, creates, starts, stops, deletes, downloads, shares, or otherwise mutates a workflow. |
 | [`reana-workflow-authoring`](skills/reana-workflow-authoring/) | `1.0.0` | Scaffold, edit, and conservatively validate provider-neutral local REANA Serial workflow projects, including reana.yaml structure, declared inputs and outputs, runtime-image reproducibility, path containment, symlinks, and accidental secrets. Use when a user asks to create or review a local REANA workflow definition before operational handoff. This skill never authenticates, contacts a REANA server or registry, uploads, submits, starts, monitors, downloads, or mutates a remote workflow. |
 
 ### Software Development

@@ -25,21 +25,24 @@ def _load_dt4acc_runner():
     return module
 
 
-def test_tap_contains_the_seventeen_curated_skills() -> None:
+def test_tap_contains_the_twenty_curated_skills() -> None:
     records = load_skills()
-    assert len(records) == 17
+    assert len(records) == 20
     assert {record["name"] for record in records} == {
         "arxiv",
         "astro-catalog-plotting-cache",
         "calculator",
         "data-aip-de-s3",
+        "drphub-products",
         "dt4acc-host-smoke-test",
+        "dt4acc-operations",
         "gaia-dr3-tap-query",
         "large-tabular-visualization",
         "latex-journal-submission-package",
         "latex-research-paper",
         "python-library-docs-first",
         "rave-dr6",
+        "reana-operator",
         "reana-workflow-authoring",
         "research-paper-evidence-workflow",
         "rss-feed-monitor",
