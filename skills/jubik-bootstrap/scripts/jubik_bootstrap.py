@@ -669,7 +669,11 @@ def create_plan(
 
     report = doctor(python_raw, uv_raw)
     if not report["ready_to_plan"]:
-        raise BootstrapError("doctor checks did not pass; inspect the doctor report")
+        raise BootstrapError(
+            "doctor checks did not pass; inspect the attached doctor evidence",
+            category="doctor_failed",
+            evidence={"doctor": report},
+        )
     plan: dict[str, Any] = {
         "schema_version": 2,
         "action": "create-jubik-core-environment",
@@ -812,7 +816,11 @@ def _validate_plan(plan_path: Path, plan: dict[str, Any], confirmation: str) -> 
 
     current = doctor(python_path, uv_path)
     if not current["ready_to_plan"]:
-        raise BootstrapError("doctor checks no longer pass for the persisted plan")
+        raise BootstrapError(
+            "doctor checks no longer pass for the persisted plan",
+            category="doctor_changed",
+            evidence={"doctor": current},
+        )
     if current["python"] != plan.get("python") or current["uv"] != plan.get("uv"):
         raise BootstrapError("planned executable binding changed")
     if current["host"] != plan.get("host") or current["assets"] != plan.get("assets"):

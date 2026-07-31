@@ -252,6 +252,38 @@ def test_doctor_returns_structured_failure_when_uv_is_missing(bootstrap, monkeyp
     assert report["uv"]["error"] == "uv executable was not found"
 
 
+def test_plan_failure_preserves_safe_doctor_evidence(
+    tmp_path: Path, bootstrap, monkeypatch
+) -> None:
+    tmp_path.chmod(0o700)
+    report = {
+        "schema_version": 2,
+        "action": "doctor",
+        "ready_to_plan": False,
+        "checks": {
+            "supported_python": True,
+            "supported_uv": False,
+            "supported_platform": True,
+            "bundled_assets_valid": True,
+        },
+        "uv": {"error": "uv executable has an unsafe owner"},
+        "transport_environment_names_present": ["HTTPS_PROXY"],
+    }
+    monkeypatch.setattr(bootstrap, "doctor", lambda _python, _uv: report)
+
+    with pytest.raises(bootstrap.BootstrapError) as caught:
+        bootstrap.create_plan(
+            str(tmp_path / "environment"),
+            str(tmp_path / "plan.json"),
+            None,
+            None,
+        )
+
+    assert caught.value.category == "doctor_failed"
+    assert caught.value.evidence == {"doctor": report}
+    assert caught.value.as_report()["evidence"]["doctor"]["checks"]["supported_uv"] is False
+
+
 def test_parser_has_persisted_plan_create_flow_and_no_verify(bootstrap) -> None:
     parser = bootstrap.build_parser()
     action = next(
