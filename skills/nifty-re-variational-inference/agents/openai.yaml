@@ -1,0 +1,4 @@
+interface:
+  display_name: "NIFTy.re Variational Inference"
+  short_description: "Run bounded, evidence-backed NIFTy.re inference"
+  default_prompt: "Use $nifty-re-variational-inference to build and validate a small, reproducible NIFTy.re variational-inference workflow."

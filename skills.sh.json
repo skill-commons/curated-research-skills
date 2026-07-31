@@ -53,6 +53,8 @@
       "skills": [
         "dt4acc-host-smoke-test",
         "dt4acc-operations",
+        "jubik-bootstrap",
+        "nifty-re-variational-inference",
         "reana-operator",
         "reana-workflow-authoring"
       ]
