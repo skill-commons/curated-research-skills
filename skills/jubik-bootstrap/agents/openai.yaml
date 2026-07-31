@@ -1,0 +1,4 @@
+interface:
+  display_name: "J-UBIK Bootstrap"
+  short_description: "Install and prove J-UBIK core readiness"
+  default_prompt: "Use $jubik-bootstrap to preflight, plan, create, or diagnose an isolated J-UBIK core environment without claiming instrument or research readiness."
