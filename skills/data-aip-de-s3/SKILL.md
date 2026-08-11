@@ -1,7 +1,7 @@
 ---
 name: data-aip-de-s3
 description: Access and cache research data from S3-compatible stores.
-version: 2.0.0
+version: 2.0.1
 author: Arman Khalatyan, Tiantian Tong, and Skill Commons contributors
 license: MIT
 metadata:
@@ -41,7 +41,27 @@ python3.12 -m venv .venv
   'dask[dataframe]==2026.7.1' 'hvplot==0.12.2' \
   'datashader==0.19.1' 'pyarrow==25.0.0' \
   'pandas==3.0.5' 's3fs==2026.6.0'
+.venv/bin/python -m pip check
 ```
+
+When `uv` is available, install the same direct pins with:
+
+```bash
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python \
+  'dask[dataframe]==2026.7.1' 'hvplot==0.12.2' \
+  'datashader==0.19.1' 'pyarrow==25.0.0' \
+  'pandas==3.0.5' 's3fs==2026.6.0'
+uv pip check --python .venv/bin/python
+```
+
+`uv` may download Python 3.12 when no compatible interpreter is installed; use
+`uv venv --no-python-downloads --python 3.12 .venv` when downloads are not permitted.
+Both recipes assume `.venv` is a new workspace path. If it already exists, inspect it and
+choose another path rather than replacing or modifying it.
+These are tested direct pins, not a complete transitive lock; pip and uv may resolve
+transitive dependencies differently. Retain a project lock when exact reproduction
+matters.
 
 Do not install into the system interpreter. Credentials must come from the user's normal
 provider configuration or environment—not from a committed script or skill.

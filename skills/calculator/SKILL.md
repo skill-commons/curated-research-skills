@@ -1,7 +1,7 @@
 ---
 name: calculator
 description: Perform exact symbolic and numerical calculations.
-version: 1.0.1
+version: 1.0.2
 author: Arman Khalatyan and Skill Commons contributors
 license: MIT
 metadata:
@@ -31,7 +31,25 @@ preinstalls the libraries:
 python3.12 -m venv .venv
 .venv/bin/python -m pip install \
   sympy==1.14.0 mpmath==1.3.0 astropy==8.0.1
+.venv/bin/python -m pip check
 ```
+
+When `uv` is available, install the same direct pins with:
+
+```bash
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python \
+  sympy==1.14.0 mpmath==1.3.0 astropy==8.0.1
+uv pip check --python .venv/bin/python
+```
+
+`uv` may download Python 3.12 when no compatible interpreter is installed; use
+`uv venv --no-python-downloads --python 3.12 .venv` when downloads are not permitted.
+Both recipes assume `.venv` is a new workspace path. If it already exists, inspect it and
+choose another path rather than replacing or modifying it.
+These are tested direct pins, not a complete transitive lock; pip and uv may resolve
+transitive dependencies differently. Retain a project lock when exact reproduction
+matters.
 
 Run the examples with `.venv/bin/python`. These versions were exercised with CPython
 3.12 on macOS ARM64; do not modify a system Python implicitly.

@@ -1,7 +1,7 @@
 ---
 name: gaia-dr3-tap-query
 description: Query Gaia DR3 through AIP TAP and Daiquiri services.
-version: 3.0.0
+version: 3.0.1
 author: Hermi (sorgenfresser), AIP, and Skill Commons contributors
 license: MIT
 metadata:
@@ -34,7 +34,27 @@ python3.12 -m venv .venv
   "astropy==8.0.1" "matplotlib==3.11.1" "numpy==2.5.1" \
   "pandas==3.0.5" "pyarrow==25.0.0" "pyvo==1.9.1" \
   "scipy==1.18.0" "seaborn==0.13.2"
+.venv/bin/python -m pip check
 ```
+
+When `uv` is available, install the same direct pins with:
+
+```bash
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python \
+  "astropy==8.0.1" "matplotlib==3.11.1" "numpy==2.5.1" \
+  "pandas==3.0.5" "pyarrow==25.0.0" "pyvo==1.9.1" \
+  "scipy==1.18.0" "seaborn==0.13.2"
+uv pip check --python .venv/bin/python
+```
+
+`uv` may download Python 3.12 when no compatible interpreter is installed; use
+`uv venv --no-python-downloads --python 3.12 .venv` when downloads are not permitted.
+Both recipes assume `.venv` is a new workspace path. If it already exists, inspect it and
+choose another path rather than replacing or modifying it.
+These are tested direct pins, not a complete transitive lock; pip and uv may resolve
+transitive dependencies differently. Retain a project lock when exact reproduction
+matters.
 
 Run the examples with `.venv/bin/python`. They send queries to `gaia.aip.de` and write
 Parquet or image files beneath the current workspace. Begin with the five-row

@@ -1,7 +1,7 @@
 ---
 name: seaborn-paper-plots
 description: Create reproducible publication plots with Seaborn.
-version: 1.0.1
+version: 1.0.2
 author: Arman Khalatyan and Skill Commons contributors
 license: MIT
 metadata:
@@ -28,7 +28,25 @@ Create a workspace-local environment:
 python3.12 -m venv .venv
 .venv/bin/python -m pip install \
   seaborn==0.13.2 matplotlib==3.11.1 pandas==3.0.5
+.venv/bin/python -m pip check
 ```
+
+When `uv` is available, install the same direct pins with:
+
+```bash
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python \
+  seaborn==0.13.2 matplotlib==3.11.1 pandas==3.0.5
+uv pip check --python .venv/bin/python
+```
+
+`uv` may download Python 3.12 when no compatible interpreter is installed; use
+`uv venv --no-python-downloads --python 3.12 .venv` when downloads are not permitted.
+Both recipes assume `.venv` is a new workspace path. If it already exists, inspect it and
+choose another path rather than replacing or modifying it.
+These are tested direct pins, not a complete transitive lock; pip and uv may resolve
+transitive dependencies differently. Retain a project lock when exact reproduction
+matters.
 
 These versions were exercised with CPython 3.12 on macOS ARM64. Run plotting scripts
 with `.venv/bin/python`; do not depend on notebook or agent-runtime state.
