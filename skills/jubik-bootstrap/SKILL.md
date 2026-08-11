@@ -1,7 +1,7 @@
 ---
 name: jubik-bootstrap
-description: Preflight, plan, create, and diagnose a pinned J-UBIK core environment with an isolated lock-backed, wheel-only workflow and a genuine synthetic SkyModel smoke test. Use when a researcher is blocked on J-UBIK installation, JAX/NIFTy compatibility, environment configuration, artifact provenance, or core readiness. This skill proves only the CPU core; it never claims JWST, Chandra, or eROSITA adapter readiness, downloads calibration or observation data, invokes instrument software, or runs research inference.
-version: 1.0.0
+description: Bootstrap a pinned J-UBIK CPU core and verify readiness. Preflight, plan, create, and diagnose its environment with an isolated lock-backed, wheel-only workflow and a genuine synthetic SkyModel smoke test. Use when a researcher is blocked on J-UBIK installation, JAX/NIFTy compatibility, environment configuration, artifact provenance, or core readiness. This skill proves only the CPU core; it never claims JWST, Chandra, or eROSITA adapter readiness, downloads calibration or observation data, invokes instrument software, or runs research inference.
+version: 1.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

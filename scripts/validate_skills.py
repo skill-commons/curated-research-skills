@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -51,6 +53,11 @@ REQUIRED_FIELDS = ("name", "description", "version", "author", "license")
 FORBIDDEN_PACKAGE_FILES = {"research-skill.yaml", "research-skill.lock"}
 SUPPORT_DIRECTORIES = {"references", "templates", "scripts", "assets", "examples"}
 MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
+SELECTION_LEAD_END_RE = re.compile(r"[.!?](?:\s|$)")
+# Mirror Hermes agent/skill_utils.py: 60 prompt characters including a three-dot suffix.
+HERMES_PROMPT_DESC_LIMIT = 60
+HERMES_PROMPT_ELLIPSIS = "..."
+HERMES_SELECTION_SURFACE_LIMIT = HERMES_PROMPT_DESC_LIMIT - len(HERMES_PROMPT_ELLIPSIS)
 
 
 def _frontmatter(path: Path) -> dict[str, Any]:
@@ -137,6 +144,48 @@ def load_skills(root: Path = SKILLS_ROOT) -> list[dict[str, Any]]:
     return records
 
 
+def hermes_prompt_description(description: str) -> str:
+    normalized = " ".join(description.split())
+    if len(normalized) > HERMES_PROMPT_DESC_LIMIT:
+        return normalized[:HERMES_SELECTION_SURFACE_LIMIT] + HERMES_PROMPT_ELLIPSIS
+    return normalized
+
+
+def prompt_selection_warnings(records: list[dict[str, Any]]) -> list[tuple[str, str]]:
+    warnings: list[tuple[str, str]] = []
+    for record in records:
+        description = record["description"]
+        if len(description) <= HERMES_PROMPT_DESC_LIMIT:
+            continue
+        sentence_end = SELECTION_LEAD_END_RE.search(description)
+        lead_length = sentence_end.start() + 1 if sentence_end else None
+        if lead_length is not None and lead_length <= HERMES_SELECTION_SURFACE_LIMIT:
+            continue
+        preview = hermes_prompt_description(description)
+        warnings.append(
+            (
+                record["name"],
+                "opening sentence does not finish within Hermes' "
+                f"{HERMES_SELECTION_SURFACE_LIMIT}-character selection surface; "
+                f"prompt preview: {preview!r}",
+            )
+        )
+    return warnings
+
+
+def emit_prompt_selection_warnings(records: list[dict[str, Any]]) -> None:
+    for name, message in prompt_selection_warnings(records):
+        path = f"skills/{name}/SKILL.md"
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            escaped = message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+            print(
+                f"::warning file={path},line=3,title=Hermes selection lead::{escaped}",
+                file=sys.stderr,
+            )
+        else:
+            print(f"warning: {path}: {message}", file=sys.stderr)
+
+
 def validate_groupings(records: list[dict[str, Any]]) -> None:
     value = json.loads(SKILLS_SH.read_text(encoding="utf-8"))
     groupings = value.get("groupings")
@@ -216,6 +265,12 @@ def render_readme(records: list[dict[str, Any]]) -> str:
     lines.extend(
         [
             "",
+            "Descriptions may retain detailed trigger and boundary prose, but their opening "
+            f"sentence should stand alone within Hermes' {HERMES_SELECTION_SURFACE_LIMIT}-"
+            "character selection surface. The validator mirrors Hermes' "
+            f"{HERMES_PROMPT_DESC_LIMIT}-character prompt truncation and emits a non-blocking "
+            "warning for longer leads.",
+            "",
             "Attribution and consolidation history are recorded in "
             "[`PROVENANCE.md`](PROVENANCE.md).",
             "",
@@ -240,6 +295,7 @@ def main() -> int:
     )
     args = parser.parse_args()
     records = load_skills()
+    emit_prompt_selection_warnings(records)
     validate_groupings(records)
     expected = render_readme(records)
     if args.check:

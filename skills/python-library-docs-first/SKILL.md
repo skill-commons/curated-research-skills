@@ -1,7 +1,7 @@
 ---
 name: python-library-docs-first
-description: Verify version-sensitive third-party Python APIs against authoritative documentation before writing, reviewing, fixing, or explaining code.
-version: 2.0.0
+description: Verify Python APIs against version-matched documentation. Check version-sensitive third-party APIs against authoritative documentation before writing, reviewing, fixing, or explaining code.
+version: 2.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

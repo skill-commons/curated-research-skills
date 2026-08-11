@@ -1,7 +1,7 @@
 ---
 name: large-tabular-visualization
-description: Build interpretable interactive or static visualizations from tabular data that is too dense or too large for ordinary point plotting.
-version: 2.0.1
+description: Visualize large tabular data with hvPlot and Datashader. Build interpretable interactive or static plots for datasets too dense or too large for ordinary point plotting.
+version: 2.0.2
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

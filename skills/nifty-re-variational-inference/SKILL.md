@@ -1,7 +1,7 @@
 ---
 name: nifty-re-variational-inference
-description: Build, run, and validate bounded Bayesian variational-inference workflows with the JAX-based NIFTy.re API. Use when a researcher needs to formulate priors, a response and likelihood, prove a NIFTy.re installation against an analytic posterior, run a small CPU pilot, inspect optimizer and sampling evidence, or prepare a reproducible inference handoff. Do not use this skill to bootstrap J-UBIK, configure telescope instruments, certify an arbitrary scientific model from one successful run, or launch unbounded production inference.
-version: 1.0.0
+description: Run bounded Bayesian variational inference with NIFTy.re. Build and validate workflows with the JAX-based NIFTy.re API. Use when a researcher needs to formulate priors, a response and likelihood, prove a NIFTy.re installation against an analytic posterior, run a small CPU pilot, inspect optimizer and sampling evidence, or prepare a reproducible inference handoff. Do not use this skill to bootstrap J-UBIK, configure telescope instruments, certify an arbitrary scientific model from one successful run, or launch unbounded production inference.
+version: 1.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

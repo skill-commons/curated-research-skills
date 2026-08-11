@@ -1,7 +1,7 @@
 ---
 name: drphub-products
-description: Inspect Digital Research Product Hub health, API capabilities, product summaries, maturity, and lineage through a bounded read-only REST client. Use when a user needs to diagnose a DRP Hub endpoint, search or inspect products, verify immutable Git and image identities, or review maturity and clone relationships without creating, changing, publishing, sharing, reviewing, or deleting remote data.
-version: 1.0.0
+description: Inspect Digital Research Product Hub products and health. Report API capabilities, product summaries, maturity, and lineage through a bounded read-only REST client. Use when a user needs to diagnose a DRP Hub endpoint, search or inspect products, verify immutable Git and image identities, or review maturity and clone relationships without creating, changing, publishing, sharing, reviewing, or deleting remote data.
+version: 1.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

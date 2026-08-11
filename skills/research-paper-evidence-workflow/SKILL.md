@@ -1,7 +1,7 @@
 ---
 name: research-paper-evidence-workflow
-description: Map research-paper claims to supplied evidence, synthesize completed results, construct an evidence-backed outline, and audit a draft for traceability, numeric fidelity, scope, and overclaiming. Use when notes, tables, figures, result files, or a manuscript need a claim-evidence matrix, results narrative, outline, or evidence-focused review. Do not use to design or run experiments, retrieve citations, format or compile LaTeX, manage projects, submit or promote papers, or perform external writes.
-version: 1.0.0
+description: Map research-paper claims to evidence; audit draft scope. Map claims to supplied evidence, synthesize completed results, construct an evidence-backed outline, and audit a draft for traceability, numeric fidelity, scope, and overclaiming. Use when notes, tables, figures, result files, or a manuscript need a claim-evidence matrix, results narrative, outline, or evidence-focused review. Do not use to design or run experiments, retrieve citations, format or compile LaTeX, manage projects, submit or promote papers, or perform external writes.
+version: 1.0.1
 author: Orchestra Research, AIP AstroAgent team, and Skill Commons contributors
 license: MIT
 metadata:
