@@ -5,7 +5,16 @@ from pathlib import Path
 
 import pytest
 
-from scripts.validate_skills import README, load_skills, render_readme, validate_groupings
+from scripts.validate_skills import (
+    HERMES_PROMPT_DESC_LIMIT,
+    HERMES_SELECTION_SURFACE_LIMIT,
+    README,
+    hermes_prompt_description,
+    load_skills,
+    prompt_selection_warnings,
+    render_readme,
+    validate_groupings,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -60,6 +69,32 @@ def test_readme_is_generated_from_skill_metadata() -> None:
 
 def test_skills_sh_groupings_match_hermes_categories() -> None:
     validate_groupings(load_skills())
+
+
+def test_hermes_prompt_description_matches_runtime_truncation() -> None:
+    short = "Complete short description."
+    long = "x" * (HERMES_PROMPT_DESC_LIMIT + 1)
+
+    assert hermes_prompt_description(short) == short
+    assert hermes_prompt_description(long) == "x" * HERMES_SELECTION_SURFACE_LIMIT + "..."
+    assert len(hermes_prompt_description(long)) == HERMES_PROMPT_DESC_LIMIT
+
+
+def test_prompt_selection_audit_warns_without_rejecting_metadata() -> None:
+    clear = "Inspect a bounded example safely. " + "Explain the remaining workflow in detail."
+    unclear = "Inspect and diagnose an example with a long opening sentence that exceeds the limit."
+    records = [
+        {"name": "clear", "description": clear},
+        {"name": "unclear", "description": unclear},
+    ]
+
+    assert prompt_selection_warnings(records) == [
+        (
+            "unclear",
+            "opening sentence does not finish within Hermes' 57-character selection surface; "
+            "prompt preview: 'Inspect and diagnose an example with a long opening sente...'",
+        )
+    ]
 
 
 def test_commons_publication_sidecars_are_not_in_the_tap() -> None:

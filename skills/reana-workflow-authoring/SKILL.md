@@ -1,7 +1,7 @@
 ---
 name: reana-workflow-authoring
-description: Scaffold, edit, and conservatively validate provider-neutral local REANA Serial workflow projects, including reana.yaml structure, declared inputs and outputs, runtime-image reproducibility, path containment, symlinks, and accidental secrets. Use when a user asks to create or review a local REANA workflow definition before operational handoff. This skill never authenticates, contacts a REANA server or registry, uploads, submits, starts, monitors, downloads, or mutates a remote workflow.
-version: 1.0.0
+description: Author and validate local REANA Serial workflow projects. Scaffold and edit provider-neutral projects while checking reana.yaml structure, declared inputs and outputs, runtime-image reproducibility, path containment, symlinks, and accidental secrets. Use when a user asks to create or review a local REANA workflow definition before operational handoff. This skill never authenticates, contacts a REANA server or registry, uploads, submits, starts, monitors, downloads, or mutates a remote workflow.
+version: 1.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

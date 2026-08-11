@@ -1,7 +1,7 @@
 ---
 name: dt4acc-operations
-description: Preflight, plan, start, inspect, and stop a local dt4acc simulation packaged as an already-built, digest-pinned Apptainer SIF. Use when an operator needs a bounded simulation IOC lifecycle with exact source/build provenance, a clean child environment, no host or facility network, content-bound start/stop confirmation, and exact owned-process cleanup. This first CRS version never builds or pulls images, connects to facility services, accesses live PVs, imports MongoDB data, or performs PV writes.
-version: 1.0.0
+description: Operate local dt4acc simulations from digest-pinned SIFs. Preflight, plan, start, inspect, and stop a simulation packaged as an already-built Apptainer SIF. Use when an operator needs a bounded simulation IOC lifecycle with exact source/build provenance, a clean child environment, no host or facility network, content-bound start/stop confirmation, and exact owned-process cleanup. This CRS skill never builds or pulls images, connects to facility services, accesses live PVs, imports MongoDB data, or performs PV writes.
+version: 1.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

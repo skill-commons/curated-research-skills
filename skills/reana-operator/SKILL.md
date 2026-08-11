@@ -1,7 +1,7 @@
 ---
 name: reana-operator
-description: Inspect an authenticated REANA service through a fixed read-only command allowlist, including connectivity, cluster information, workflow inventory, status, redacted logs, workspace files, and disk usage. Use when a user wants to diagnose or review remote REANA state after a local workflow has been authored. This first CRS version never uploads, creates, starts, stops, deletes, downloads, shares, or otherwise mutates a workflow.
-version: 1.0.0
+description: Inspect remote REANA workflows using read-only commands. Use a fixed allowlist against an authenticated service to report connectivity, cluster information, workflow inventory, status, redacted logs, workspace files, and disk usage. Use when a user wants to diagnose or review remote REANA state after a local workflow has been authored. This CRS skill never uploads, creates, starts, stops, deletes, downloads, shares, or otherwise mutates a workflow.
+version: 1.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

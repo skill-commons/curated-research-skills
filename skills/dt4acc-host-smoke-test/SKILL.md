@@ -1,7 +1,7 @@
 ---
 name: dt4acc-host-smoke-test
-description: Run a bounded, simulation-only host smoke test for local dt4acc, dt4acc-lib, and lat2db checkouts without facility services or containers.
-version: 2.0.0
+description: Smoke-test local dt4acc checkouts without any containers. Run a bounded, simulation-only host check for dt4acc, dt4acc-lib, and lat2db without facility services.
+version: 2.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:

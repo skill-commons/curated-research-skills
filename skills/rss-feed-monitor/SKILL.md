@@ -1,7 +1,7 @@
 ---
 name: rss-feed-monitor
-description: Track public RSS or Atom feeds in an isolated local database, scan for new articles, and manage read state with explicit mutation safeguards.
-version: 2.0.0
+description: Monitor RSS and Atom feeds in an isolated local database. Scan for new articles and manage read state with explicit mutation safeguards.
+version: 2.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:
