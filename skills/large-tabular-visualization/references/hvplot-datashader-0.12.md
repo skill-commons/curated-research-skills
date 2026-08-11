@@ -5,6 +5,12 @@ This reference was exercised with CPython 3.12.4, `dask[dataframe]` 2026.7.1, hv
 Treat that as a compatibility target, not a command to upgrade an existing project.
 Preserve the project's lockfile or create and commit a lock for a new environment.
 
+On 2026-08-11, the direct pins installed cleanly with `uv` 0.10.12 on macOS ARM64 and
+`uv pip check` reported a compatible environment. The bundled synthetic smoke exercised
+Dask Parquet loading, finite-value filtering, `rasterize=True`, a known count aggregate,
+and self-contained inline HTML export. This is an environment and rendering check, not
+scientific validation of a research dataset or visualization choice.
+
 ## Choose pandas or Dask
 
 Dask's own

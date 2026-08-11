@@ -1,7 +1,7 @@
 ---
 name: tap-pyvo-adql-access
 description: Query astronomy TAP services with PyVO and ADQL.
-version: 1.0.0
+version: 1.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:
@@ -32,7 +32,26 @@ python3.12 -m venv .venv
 .venv/bin/python -m pip install \
   "astropy==8.0.1" "pandas==3.0.5" "pyarrow==25.0.0" \
   "pyvo==1.9.1" "PyYAML==6.0.3"
+.venv/bin/python -m pip check
 ```
+
+When `uv` is available, install the same direct pins with:
+
+```bash
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python \
+  "astropy==8.0.1" "pandas==3.0.5" "pyarrow==25.0.0" \
+  "pyvo==1.9.1" "PyYAML==6.0.3"
+uv pip check --python .venv/bin/python
+```
+
+`uv` may download Python 3.12 when no compatible interpreter is installed; use
+`uv venv --no-python-downloads --python 3.12 .venv` when downloads are not permitted.
+Both recipes assume `.venv` is a new workspace path. If it already exists, inspect it and
+choose another path rather than replacing or modifying it.
+These are tested direct pins, not a complete transitive lock; pip and uv may resolve
+transitive dependencies differently. Retain a project lock when exact reproduction
+matters.
 
 Run the examples with `.venv/bin/python`. Network requests go to the TAP endpoint chosen
 by the user, and the caching examples write query results into the current workspace.

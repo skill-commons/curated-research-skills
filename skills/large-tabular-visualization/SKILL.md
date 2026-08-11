@@ -1,7 +1,7 @@
 ---
 name: large-tabular-visualization
 description: Build interpretable interactive or static visualizations from tabular data that is too dense or too large for ordinary point plotting.
-version: 2.0.0
+version: 2.0.1
 author: AIP AstroAgent team and Skill Commons contributors
 license: MIT
 metadata:
@@ -17,6 +17,50 @@ metadata:
 ---
 
 # Large Tabular Visualization
+
+## Portable Setup
+
+Use CPython 3.12 in an isolated environment. The following direct versions were
+exercised together for this workflow:
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/python -m pip install \
+  'numpy==2.4.6' 'pandas==3.0.5' 'dask[dataframe]==2026.7.1' \
+  'hvplot==0.12.2' 'datashader==0.19.1' 'pyarrow==25.0.0' 'bokeh==3.9.2'
+.venv/bin/python -m pip check
+```
+
+When `uv` is available, install the same direct pins with:
+
+```bash
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python \
+  'numpy==2.4.6' 'pandas==3.0.5' 'dask[dataframe]==2026.7.1' \
+  'hvplot==0.12.2' 'datashader==0.19.1' 'pyarrow==25.0.0' 'bokeh==3.9.2'
+uv pip check --python .venv/bin/python
+```
+
+`uv` may download Python 3.12 when no compatible interpreter is installed; use
+`uv venv --no-python-downloads --python 3.12 .venv` when downloads are not permitted.
+Both recipes assume `.venv` is a new workspace path. If it already exists, inspect it and
+choose another path rather than replacing or modifying it.
+These are tested direct pins, not a complete transitive lock; pip and uv may resolve
+transitive dependencies differently. Retain a project lock when exact reproduction
+matters. Run examples with `.venv/bin/python` and do not modify a system interpreter.
+
+Keep `.venv` in the user workspace, not inside the installed skill directory. Resolve the
+skill's installed path, then verify the late-loading Datashader path before using research
+data:
+
+```bash
+SKILL_DIR=/path/to/installed/large-tabular-visualization
+PYTHONDONTWRITEBYTECODE=1 \
+  .venv/bin/python "$SKILL_DIR/scripts/hvplot_datashader_smoke.py"
+```
+
+The bounded smoke uses synthetic data in a private temporary directory, checks a known
+count aggregation, exports inline HTML, reads it back, and leaves no persistent output.
 
 ## When to Use
 

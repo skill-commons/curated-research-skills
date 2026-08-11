@@ -29,7 +29,7 @@ Literature discovery, evidence synthesis, monitoring, and scientific calculation
 | Skill | Version | Description |
 |---|---:|---|
 | [`arxiv`](skills/arxiv/) | `2.0.0` | Search, read, cite, and monitor papers through arXiv. |
-| [`calculator`](skills/calculator/) | `1.0.1` | Perform exact symbolic and numerical calculations. |
+| [`calculator`](skills/calculator/) | `1.0.2` | Perform exact symbolic and numerical calculations. |
 | [`research-paper-evidence-workflow`](skills/research-paper-evidence-workflow/) | `1.0.0` | Map research-paper claims to supplied evidence, synthesize completed results, construct an evidence-backed outline, and audit a draft for traceability, numeric fidelity, scope, and overclaiming. Use when notes, tables, figures, result files, or a manuscript need a claim-evidence matrix, results narrative, outline, or evidence-focused review. Do not use to design or run experiments, retrieve citations, format or compile LaTeX, manage projects, submit or promote papers, or perform external writes. |
 | [`rss-feed-monitor`](skills/rss-feed-monitor/) | `2.0.0` | Track public RSS or Atom feeds in an isolated local database, scan for new articles, and manage read state with explicit mutation safeguards. |
 
@@ -48,11 +48,11 @@ Astronomy catalog access, survey workflows, and scientific visualization.
 
 | Skill | Version | Description |
 |---|---:|---|
-| [`astro-catalog-plotting-cache`](skills/astro-catalog-plotting-cache/) | `2.0.0` | Create cached, publication-ready astronomy catalog plots. |
-| [`gaia-dr3-tap-query`](skills/gaia-dr3-tap-query/) | `3.0.0` | Query Gaia DR3 through AIP TAP and Daiquiri services. |
-| [`rave-dr6`](skills/rave-dr6/) | `2.0.0` | Query, cache, and crossmatch public RAVE DR6 data. |
-| [`starhorse-access`](skills/starhorse-access/) | `2.0.2` | Access StarHorse SHboost and SH21 catalog products. |
-| [`tap-pyvo-adql-access`](skills/tap-pyvo-adql-access/) | `1.0.0` | Query astronomy TAP services with PyVO and ADQL. |
+| [`astro-catalog-plotting-cache`](skills/astro-catalog-plotting-cache/) | `2.0.1` | Create cached, publication-ready astronomy catalog plots. |
+| [`gaia-dr3-tap-query`](skills/gaia-dr3-tap-query/) | `3.0.1` | Query Gaia DR3 through AIP TAP and Daiquiri services. |
+| [`rave-dr6`](skills/rave-dr6/) | `2.0.1` | Query, cache, and crossmatch public RAVE DR6 data. |
+| [`starhorse-access`](skills/starhorse-access/) | `2.0.3` | Access StarHorse SHboost and SH21 catalog products. |
+| [`tap-pyvo-adql-access`](skills/tap-pyvo-adql-access/) | `1.0.1` | Query astronomy TAP services with PyVO and ADQL. |
 
 ### Data
 
@@ -60,7 +60,7 @@ Reproducible access to large research datasets and object storage.
 
 | Skill | Version | Description |
 |---|---:|---|
-| [`data-aip-de-s3`](skills/data-aip-de-s3/) | `2.0.0` | Access and cache research data from S3-compatible stores. |
+| [`data-aip-de-s3`](skills/data-aip-de-s3/) | `2.0.1` | Access and cache research data from S3-compatible stores. |
 | [`drphub-products`](skills/drphub-products/) | `1.0.0` | Inspect Digital Research Product Hub health, API capabilities, product summaries, maturity, and lineage through a bounded read-only REST client. Use when a user needs to diagnose a DRP Hub endpoint, search or inspect products, verify immutable Git and image identities, or review maturity and clone relationships without creating, changing, publishing, sharing, reviewing, or deleting remote data. |
 
 ### Visualization
@@ -69,8 +69,8 @@ General-purpose publication and report graphics.
 
 | Skill | Version | Description |
 |---|---:|---|
-| [`large-tabular-visualization`](skills/large-tabular-visualization/) | `2.0.0` | Build interpretable interactive or static visualizations from tabular data that is too dense or too large for ordinary point plotting. |
-| [`seaborn-paper-plots`](skills/seaborn-paper-plots/) | `1.0.1` | Create reproducible publication plots with Seaborn. |
+| [`large-tabular-visualization`](skills/large-tabular-visualization/) | `2.0.1` | Build interpretable interactive or static visualizations from tabular data that is too dense or too large for ordinary point plotting. |
+| [`seaborn-paper-plots`](skills/seaborn-paper-plots/) | `1.0.2` | Create reproducible publication plots with Seaborn. |
 
 ### Scientific Computing
 
