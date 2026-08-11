@@ -69,7 +69,7 @@ General-purpose publication and report graphics.
 
 | Skill | Version | Description |
 |---|---:|---|
-| [`large-tabular-visualization`](skills/large-tabular-visualization/) | `2.0.0` | Build interpretable interactive or static visualizations from tabular data that is too dense or too large for ordinary point plotting. |
+| [`large-tabular-visualization`](skills/large-tabular-visualization/) | `2.0.1` | Build interpretable interactive or static visualizations from tabular data that is too dense or too large for ordinary point plotting. |
 | [`seaborn-paper-plots`](skills/seaborn-paper-plots/) | `1.0.1` | Create reproducible publication plots with Seaborn. |
 
 ### Scientific Computing
