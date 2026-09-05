@@ -50,7 +50,7 @@ Astronomy catalog access, survey workflows, and scientific visualization.
 |---|---:|---|
 | [`astro-catalog-plotting-cache`](skills/astro-catalog-plotting-cache/) | `2.0.1` | Create cached, publication-ready astronomy catalog plots. |
 | [`gaia-dr3-tap-query`](skills/gaia-dr3-tap-query/) | `3.0.1` | Query Gaia DR3 through AIP TAP and Daiquiri services. |
-| [`rave-dr6`](skills/rave-dr6/) | `2.0.1` | Query, cache, and crossmatch public RAVE DR6 data. |
+| [`rave-dr6`](skills/rave-dr6/) | `2.1.0` | Query and plot public RAVE DR6 spectra and catalogs. |
 | [`starhorse-access`](skills/starhorse-access/) | `2.0.3` | Access StarHorse SHboost and SH21 catalog products. |
 | [`tap-pyvo-adql-access`](skills/tap-pyvo-adql-access/) | `1.0.1` | Query astronomy TAP services with PyVO and ADQL. |
 
