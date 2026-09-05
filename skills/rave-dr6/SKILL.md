@@ -1,7 +1,7 @@
 ---
 name: rave-dr6
 description: Query and plot public RAVE DR6 spectra and catalogs.
-version: 2.1.0
+version: 2.1.1
 author: Arman Khalatyan, Tiantian Tong, and Skill Commons contributors
 license: MIT
 metadata:
@@ -34,24 +34,42 @@ For spectrum selection, FITS interpretation, and the bundled plotting workflow, 
 
 ## Portable Setup
 
-Use CPython 3.12 in an isolated environment:
+From the working project, use CPython 3.12 in a fresh isolated environment. Keep the
+environment and outputs outside the installed skill directory. In Ori, do not install
+these pins into the agent's shared `_base` environment or inherit its system site-packages:
+it has a different dependency contract. These recipes test the isolated environment,
+not `_base`.
 
 ```bash
+(
+set -e
+if [ -e .venv ] || [ -L .venv ]; then
+  printf '%s\n' 'Refusing existing .venv; inspect it and choose a new workspace path.' >&2
+  exit 1
+fi
 python3.12 -m venv .venv
 .venv/bin/python -m pip install \
   'astropy==8.0.1' 'pyvo==1.9.1' 'pandas==3.0.5' 'pyarrow==25.0.0' \
   'matplotlib==3.11.1' 'seaborn==0.13.2' 'numpy==2.5.1'
 .venv/bin/python -m pip check
+)
 ```
 
 When `uv` is available, install the same direct pins with:
 
 ```bash
+(
+set -e
+if [ -e .venv ] || [ -L .venv ]; then
+  printf '%s\n' 'Refusing existing .venv; inspect it and choose a new workspace path.' >&2
+  exit 1
+fi
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python \
   'astropy==8.0.1' 'pyvo==1.9.1' 'pandas==3.0.5' 'pyarrow==25.0.0' \
   'matplotlib==3.11.1' 'seaborn==0.13.2' 'numpy==2.5.1'
 uv pip check --python .venv/bin/python
+)
 ```
 
 `uv` may download Python 3.12 when no compatible interpreter is installed; use
@@ -61,6 +79,8 @@ choose another path rather than replacing or modifying it.
 These are tested direct pins, not a complete transitive lock; pip and uv may resolve
 transitive dependencies differently. Retain a project lock when exact reproduction
 matters.
+Ori workspace backups may omit `.venv`; recreate it from these pins after a restore.
+First use therefore needs package-index access, installation time, and disk space.
 
 Run examples with `.venv/bin/python`. The public service requires network access but no
 credentials. Start with metadata and a tiny query before requesting a larger result.
@@ -141,10 +161,12 @@ URLs, not flux samples. Query the table by `rave_obs_id`, then download and vali
 FITS product. Do not synthesize a URL from an identifier because not every possible
 identifier has a released spectrum.
 
-For a bounded end-to-end check using a vetted normal-star observation:
+For a bounded end-to-end check using a vetted normal-star observation, run from the
+working project with its isolated interpreter. Replace `/path/to/skill` with this skill's
+installed directory; the helper is [`scripts/rave_spectrum_demo.py`](scripts/rave_spectrum_demo.py):
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/rave_spectrum_demo.py \
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python /path/to/skill/scripts/rave_spectrum_demo.py \
   --rave-obs-id 20100313_0823m14_113 \
   --out outputs/rave-dr6/spectrum-demo
 ```

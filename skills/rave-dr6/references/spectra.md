@@ -161,10 +161,12 @@ fresh bounded retrieval when network conditions permit.
 
 ## Bounded helper
 
-From the installed skill directory, run:
+From the working project, use its isolated interpreter and the installed helper path.
+Replace `/path/to/skill` with this skill's installed directory; keep outputs in the
+workspace, not in that directory:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/rave_spectrum_demo.py \
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python /path/to/skill/scripts/rave_spectrum_demo.py \
   --rave-obs-id 20100313_0823m14_113 \
   --out outputs/rave-dr6/spectrum-demo
 ```

@@ -1,7 +1,7 @@
 ---
 name: gaia-dr3-tap-query
 description: Query Gaia DR3 catalogs and spectra at AIP.
-version: 3.1.0
+version: 3.1.1
 author: Hermi (sorgenfresser), AIP, and Skill Commons contributors
 license: MIT
 metadata:
@@ -31,28 +31,46 @@ For sampled BP/RP (XP) or RVS spectra, read
 wavelength grids, and error interpretation. Continuous XP needs reconstruction and is
 not interchangeable with the sampled product.
 
-> Dependencies (`pyvo`, `pandas`, `pyarrow`, `matplotlib`, `seaborn`) are
-> not bundled with the skill. Create an isolated Python 3.12 environment and install the
-> tested versions below.
+## Portable Setup
+
+Dependencies are not bundled with the skill. From the working project, create a fresh,
+isolated Python 3.12 environment with the tested direct pins below. Keep the environment
+and outputs outside the installed skill directory. In Ori, do not install these pins into
+the agent's shared `_base` environment or inherit its system site-packages: it has a
+different dependency contract. These recipes test the isolated environment, not `_base`.
 
 ```bash
+(
+set -e
+if [ -e .venv ] || [ -L .venv ]; then
+  printf '%s\n' 'Refusing existing .venv; inspect it and choose a new workspace path.' >&2
+  exit 1
+fi
 python3.12 -m venv .venv
 .venv/bin/python -m pip install \
   "astropy==8.0.1" "matplotlib==3.11.1" "numpy==2.5.1" \
   "pandas==3.0.5" "pyarrow==25.0.0" "pyvo==1.9.1" \
-  "scipy==1.18.0" "seaborn==0.13.2"
+  "requests==2.34.2" "scipy==1.18.0" "seaborn==0.13.2"
 .venv/bin/python -m pip check
+)
 ```
 
 When `uv` is available, install the same direct pins with:
 
 ```bash
+(
+set -e
+if [ -e .venv ] || [ -L .venv ]; then
+  printf '%s\n' 'Refusing existing .venv; inspect it and choose a new workspace path.' >&2
+  exit 1
+fi
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python \
   "astropy==8.0.1" "matplotlib==3.11.1" "numpy==2.5.1" \
   "pandas==3.0.5" "pyarrow==25.0.0" "pyvo==1.9.1" \
-  "scipy==1.18.0" "seaborn==0.13.2"
+  "requests==2.34.2" "scipy==1.18.0" "seaborn==0.13.2"
 uv pip check --python .venv/bin/python
+)
 ```
 
 `uv` may download Python 3.12 when no compatible interpreter is installed; use
@@ -62,6 +80,8 @@ choose another path rather than replacing or modifying it.
 These are tested direct pins, not a complete transitive lock; pip and uv may resolve
 transitive dependencies differently. Retain a project lock when exact reproduction
 matters.
+Ori workspace backups may omit `.venv`; recreate it from these pins after a restore.
+First use therefore needs package-index access, installation time, and disk space.
 
 Run the examples with `.venv/bin/python`. They send queries to `gaia.aip.de` and write
 Parquet or image files beneath the current workspace. Begin with the five-row
