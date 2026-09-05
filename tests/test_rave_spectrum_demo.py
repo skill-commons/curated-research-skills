@@ -35,10 +35,7 @@ def test_observation_id_and_query_are_bounded() -> None:
 def test_fits_url_is_bound_to_exact_https_archive_path() -> None:
     module = _load_script()
     obs_id = "20100313_0823m14_113"
-    expected = (
-        "https://www.rave-survey.org/files/fits/20100313/"
-        "RAVE_20100313_0823m14_113.fits"
-    )
+    expected = "https://www.rave-survey.org/files/fits/20100313/RAVE_20100313_0823m14_113.fits"
     assert module.validate_fits_url(expected, obs_id) == expected
     for unsafe in (
         expected.replace("https://", "http://"),
