@@ -63,7 +63,7 @@ Reproducible access to large research datasets and object storage.
 | Skill | Version | Description |
 |---|---:|---|
 | [`data-aip-de-s3`](skills/data-aip-de-s3/) | `2.0.1` | Access and cache research data from S3-compatible stores. |
-| [`drphub-cards`](skills/drphub-cards/) | `2.1.2` | Manage and publish DRP Hub research products via REST. Supports full CRUD, clone, maturity, publish, audit, lineage, human-review, bookmarks, likes, sharing, and SSE event streaming against the production API at drp-term.kube.aip.de/api/v1/. |
+| [`drphub-cards`](skills/drphub-cards/) | `2.1.3` | Manage and publish DRP Hub research products via REST. Supports full CRUD, clone, maturity, publish, audit, lineage, human-review, bookmarks, likes, sharing, and SSE event streaming against the production API at drp-term.kube.aip.de/api/v1/. |
 | [`drphub-products`](skills/drphub-products/) | `1.0.1` | Inspect Digital Research Product Hub products and health. Report API capabilities, product summaries, maturity, and lineage through a bounded read-only REST client. Use when a user needs to diagnose a DRP Hub endpoint, search or inspect products, verify immutable Git and image identities, or review maturity and clone relationships without creating, changing, publishing, sharing, reviewing, or deleting remote data. |
 
 ### Visualization
