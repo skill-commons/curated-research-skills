@@ -1,13 +1,20 @@
+import ast
 import re
+import subprocess
+import sys
 from pathlib import Path
+
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_WITH_PORTABLE_ENVIRONMENTS = (
     "astro-catalog-plotting-cache",
     "calculator",
+    "coseecat",
     "data-aip-de-s3",
     "gaia-dr3-tap-query",
     "large-tabular-visualization",
+    "pepsi-spectra",
     "rave-dr6",
     "seaborn-paper-plots",
     "starhorse-access",
@@ -78,3 +85,63 @@ def test_large_tabular_environment_covers_the_exercised_rendering_stack() -> Non
     compile(smoke.read_text(encoding="utf-8"), str(smoke), "exec")
     assert "scripts/hvplot_datashader_smoke.py" in text
     assert "PYTHONDONTWRITEBYTECODE=1" in text
+
+
+@pytest.mark.parametrize("name", ["gaia-dr3-tap-query", "rave-dr6", "pepsi-spectra", "coseecat"])
+@pytest.mark.parametrize("installer", ["pip", "uv"])
+@pytest.mark.parametrize("existing", ["directory", "file", "symlink", "dangling-symlink"])
+def test_spectrum_setup_refuses_existing_paths_without_mutation(
+    name: str, installer: str, existing: str, tmp_path: Path
+) -> None:
+    text = (ROOT / "skills" / name / "SKILL.md").read_text(encoding="utf-8")
+    marker = ".venv/bin/python -m pip install" if installer == "pip" else "uv pip install"
+    block = next(block for block in BASH_BLOCK.findall(text) if marker in block)
+    target = tmp_path / ".venv"
+    sentinel = tmp_path / "user-owned"
+    sentinel.write_text("preserve me", encoding="utf-8")
+    if existing == "directory":
+        target.mkdir()
+        sentinel = target / "user-owned"
+        sentinel.write_text("preserve me", encoding="utf-8")
+    elif existing == "file":
+        target.write_text("preserve me", encoding="utf-8")
+    else:
+        target.symlink_to(sentinel if existing == "symlink" else tmp_path / "absent")
+    before = target.lstat()
+
+    # Empty PATH prevents any package/network operation if the guard regresses.
+    result = subprocess.run(
+        ["/bin/bash", "--noprofile", "--norc", "-c", block],
+        cwd=tmp_path,
+        env={"PATH": ""},
+        text=True,
+        capture_output=True,
+        timeout=10,
+        check=False,
+    )
+
+    assert result.returncode == 1, result.stderr
+    assert "Refusing existing .venv" in result.stderr
+    assert target.lstat() == before
+    assert sentinel.read_text(encoding="utf-8") == "preserve me"
+    if existing == "file":
+        assert target.read_text(encoding="utf-8") == "preserve me"
+
+
+@pytest.mark.parametrize("name", ["gaia-dr3-tap-query", "rave-dr6", "pepsi-spectra", "coseecat"])
+def test_spectrum_helpers_pin_every_direct_third_party_import(name: str) -> None:
+    skill = ROOT / "skills" / name
+    text = (skill / "SKILL.md").read_text(encoding="utf-8")
+    block = next(
+        block for block in BASH_BLOCK.findall(text) if ".venv/bin/python -m pip install" in block
+    )
+    pinned_packages = {pin.split("==")[0] for pin in _pins(block)}
+    imports = set()
+    for script in (skill / "scripts").glob("*.py"):
+        for node in ast.walk(ast.parse(script.read_text(encoding="utf-8"))):
+            if isinstance(node, ast.Import):
+                imports.update(alias.name.split(".")[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imports.add(node.module.split(".")[0])
+
+    assert imports - sys.stdlib_module_names <= pinned_packages

@@ -1,7 +1,7 @@
 ---
 name: rave-dr6
-description: Query, cache, and crossmatch public RAVE DR6 data.
-version: 2.0.1
+description: Query and plot public RAVE DR6 spectra and catalogs.
+version: 2.1.1
 author: Arman Khalatyan, Tiantian Tong, and Skill Commons contributors
 license: MIT
 metadata:
@@ -12,6 +12,8 @@ metadata:
       - rave-dr6
       - tap
       - pyvo
+      - spectra
+      - fits
       - stellar-parameters
       - crossmatch
 ---
@@ -20,33 +22,54 @@ metadata:
 
 ## When to Use
 
-Use this skill for RAVE DR6 table discovery, stellar-parameter queries, observation
-metadata, Gaia crossmatches, and RAVE-to-StarHorse distance joins. A fixed sample size,
-ordering, or plot style is a query/visualization choice—not a separate skill.
+Use this skill for RAVE DR6 table discovery, 1-D spectrum retrieval, stellar-parameter
+queries, observation metadata, Gaia crossmatches, and RAVE-to-StarHorse distance joins.
+A fixed sample size, ordering, or plot style is a query/visualization choice—not a
+separate skill.
 
 Use `tap-pyvo-adql-access` for generic TAP mechanics and
 `astro-catalog-plotting-cache` after the query has produced a local table.
+For spectrum selection, FITS interpretation, and the bundled plotting workflow, read
+[`references/spectra.md`](references/spectra.md).
 
 ## Portable Setup
 
-Use CPython 3.12 in an isolated environment:
+From the working project, use CPython 3.12 in a fresh isolated environment. Keep the
+environment and outputs outside the installed skill directory. In Ori, do not install
+these pins into the agent's shared `_base` environment or inherit its system site-packages:
+it has a different dependency contract. These recipes test the isolated environment,
+not `_base`.
 
 ```bash
+(
+set -e
+if [ -e .venv ] || [ -L .venv ]; then
+  printf '%s\n' 'Refusing existing .venv; inspect it and choose a new workspace path.' >&2
+  exit 1
+fi
 python3.12 -m venv .venv
 .venv/bin/python -m pip install \
-  'pyvo==1.9.1' 'pandas==3.0.5' 'pyarrow==25.0.0' \
+  'astropy==8.0.1' 'pyvo==1.9.1' 'pandas==3.0.5' 'pyarrow==25.0.0' \
   'matplotlib==3.11.1' 'seaborn==0.13.2' 'numpy==2.5.1'
 .venv/bin/python -m pip check
+)
 ```
 
 When `uv` is available, install the same direct pins with:
 
 ```bash
+(
+set -e
+if [ -e .venv ] || [ -L .venv ]; then
+  printf '%s\n' 'Refusing existing .venv; inspect it and choose a new workspace path.' >&2
+  exit 1
+fi
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python \
-  'pyvo==1.9.1' 'pandas==3.0.5' 'pyarrow==25.0.0' \
+  'astropy==8.0.1' 'pyvo==1.9.1' 'pandas==3.0.5' 'pyarrow==25.0.0' \
   'matplotlib==3.11.1' 'seaborn==0.13.2' 'numpy==2.5.1'
 uv pip check --python .venv/bin/python
+)
 ```
 
 `uv` may download Python 3.12 when no compatible interpreter is installed; use
@@ -56,6 +79,8 @@ choose another path rather than replacing or modifying it.
 These are tested direct pins, not a complete transitive lock; pip and uv may resolve
 transitive dependencies differently. Retain a project lock when exact reproduction
 matters.
+Ori workspace backups may omit `.venv`; recreate it from these pins after a restore.
+First use therefore needs package-index access, installation time, and disk space.
 
 Run examples with `.venv/bin/python`. The public service requires network access but no
 credentials. Start with metadata and a tiny query before requesting a larger result.
@@ -125,8 +150,30 @@ Discover these from the live service before relying on them:
 | `ravedr6.dr6_cnn` | CNN products and a Gaia source identifier |
 | `ravedr6.dr6_x_gaiaedr3` | Gaia EDR3 crossmatch with astrometry and photometry |
 | `ravedr6.dr6_x_gaiadr2` | Gaia DR2 crossmatch |
+| `ravedr6.dr6_spectra` | Observation-level DOI, preview, and public FITS links |
 | `ravedr6.dr6_orbits` | Orbital parameters |
 | `ravedr6.dr6_seismic` | Seismic products |
+
+## Individual 1-D Spectra
+
+The TAP spectrum table is an index: it returns observation metadata and public FITS/PNG
+URLs, not flux samples. Query the table by `rave_obs_id`, then download and validate the
+FITS product. Do not synthesize a URL from an identifier because not every possible
+identifier has a released spectrum.
+
+For a bounded end-to-end check using a vetted normal-star observation, run from the
+working project with its isolated interpreter. Replace `/path/to/skill` with this skill's
+installed directory; the helper is [`scripts/rave_spectrum_demo.py`](scripts/rave_spectrum_demo.py):
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 .venv/bin/python /path/to/skill/scripts/rave_spectrum_demo.py \
+  --rave-obs-id 20100313_0823m14_113 \
+  --out outputs/rave-dr6/spectrum-demo
+```
+
+The helper writes the exact ADQL query, cached FITS file, wavelength/flux/error CSV,
+figure, and provenance JSON. Read [`references/spectra.md`](references/spectra.md) before
+changing target-selection cuts or interpreting the arrays scientifically.
 
 ## Distance Choices
 
@@ -140,10 +187,10 @@ Discover these from the live service before relying on them:
 
 ## Plotting
 
-Pass the local Parquet result to `astro-catalog-plotting-cache`. That skill covers
-RA/Dec maps, Galactic projections, CMDs, density rendering, publication style, talk
-style, and figure provenance. Choose sample size and style from the scientific question,
-not from a hard-coded “nearest 100” recipe.
+Pass local catalog results to `astro-catalog-plotting-cache`. That skill covers RA/Dec
+maps, Galactic projections, CMDs, density rendering, publication style, talk style, and
+figure provenance. Use the spectrum reference and helper for FITS spectra. Choose sample
+size and style from the scientific question, not from a hard-coded “nearest 100” recipe.
 
 ## Pitfalls
 
@@ -156,6 +203,10 @@ not from a hard-coded “nearest 100” recipe.
   number of selected stars.
 - Deduplicate by the scientifically appropriate identifier after a crossmatch; one
   source can have multiple observations.
+- Treat `rave_obs_id` as the spectrum identifier and `raveid` as the target identifier;
+  repeated observations of one star are scientifically distinct spectra.
+- Reconstruct each wavelength array from its FITS header. RAVE grids and lengths vary.
+- RAVE spectra are continuum-normalized; they are not absolute spectrophotometry.
 
 ## Verification
 
@@ -165,3 +216,5 @@ not from a hard-coded “nearest 100” recipe.
 - [ ] Units and Gaia/source-ID release semantics were checked.
 - [ ] Crossmatch duplicates and unmatched rows were measured.
 - [ ] Any plot is produced from the cache with recorded provenance.
+- [ ] If a spectrum was requested, the FITS origin, observation ID, HDUs, wavelength
+      calibration, error array, cached derivative, and figure were verified.

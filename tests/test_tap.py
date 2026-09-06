@@ -34,13 +34,14 @@ def _load_dt4acc_runner():
     return module
 
 
-def test_tap_contains_the_twenty_two_curated_skills() -> None:
+def test_tap_contains_the_twenty_four_curated_skills() -> None:
     records = load_skills()
-    assert len(records) == 22
+    assert len(records) == 24
     assert {record["name"] for record in records} == {
         "arxiv",
         "astro-catalog-plotting-cache",
         "calculator",
+        "coseecat",
         "data-aip-de-s3",
         "drphub-products",
         "dt4acc-host-smoke-test",
@@ -51,6 +52,7 @@ def test_tap_contains_the_twenty_two_curated_skills() -> None:
         "latex-journal-submission-package",
         "latex-research-paper",
         "nifty-re-variational-inference",
+        "pepsi-spectra",
         "python-library-docs-first",
         "rave-dr6",
         "reana-operator",
