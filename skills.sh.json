@@ -38,6 +38,7 @@
       "description": "Reproducible access to large research datasets and object storage.",
       "skills": [
         "data-aip-de-s3",
+        "drphub-cards",
         "drphub-products"
       ]
     },
