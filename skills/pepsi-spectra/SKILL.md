@@ -1,7 +1,7 @@
 ---
 name: pepsi-spectra
 description: Retrieve and plot public PEPSI stellar spectra.
-version: 1.0.0
+version: 1.0.1
 author: Tiantian Tong and Skill Commons contributors
 license: MIT
 metadata:
@@ -132,3 +132,10 @@ credentials and never publishes, uploads, or writes into an installed skill.
   retrieval timestamp on cache replay and cite the archive and Paper II with the demo.
 - High S/N and fine sampling do not establish abundance precision. Continuum placement,
   telluric absorption, correlated errors, and instrumental systematics still matter.
+- Identify absorption lines only against [`references/lines.md`](references/lines.md) or
+  a line list queried in the same session. Report any other feature by its measured
+  wavelength and say it is unidentified; do not name a species from memory. Compare a
+  reference wavelength with the measured line **core**, not with the nearest grid
+  sample: a nearby grid point does not establish that an absorption feature exists.
+  State the measurement method and justified uncertainty; a fitted centre can have
+  sub-pixel precision, while calibration, blends and reference uncertainties still matter.
