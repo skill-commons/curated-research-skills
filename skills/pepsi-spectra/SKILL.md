@@ -136,4 +136,6 @@ credentials and never publishes, uploads, or writes into an installed skill.
   a line list queried in the same session. Report any other feature by its measured
   wavelength and say it is unidentified; do not name a species from memory. Compare a
   reference wavelength with the measured line **core**, not with the nearest grid
-  sample -- at this sampling a nearest-sample agreement is guaranteed and shows nothing.
+  sample: a nearby grid point does not establish that an absorption feature exists.
+  State the measurement method and justified uncertainty; a fitted centre can have
+  sub-pixel precision, while calibration, blends and reference uncertainties still matter.
