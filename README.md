@@ -51,6 +51,7 @@ Astronomy catalog access, survey workflows, and scientific visualization.
 | [`astro-catalog-plotting-cache`](skills/astro-catalog-plotting-cache/) | `2.0.1` | Create cached, publication-ready astronomy catalog plots. |
 | [`coseecat`](skills/coseecat/) | `1.0.0` | Query solar electron events and plots from CoSEE-Cat. |
 | [`gaia-dr3-tap-query`](skills/gaia-dr3-tap-query/) | `3.1.1` | Query Gaia DR3 catalogs and spectra at AIP. |
+| [`muse-science-products`](skills/muse-science-products/) | `1.0.0` | Plot published MUSE maps and H II region measurements. |
 | [`pepsi-spectra`](skills/pepsi-spectra/) | `1.0.1` | Retrieve and plot public PEPSI stellar spectra. |
 | [`rave-dr6`](skills/rave-dr6/) | `2.1.1` | Query and plot public RAVE DR6 spectra and catalogs. |
 | [`starhorse-access`](skills/starhorse-access/) | `2.0.3` | Access StarHorse SHboost and SH21 catalog products. |
