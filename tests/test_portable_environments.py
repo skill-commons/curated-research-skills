@@ -14,6 +14,7 @@ SKILLS_WITH_PORTABLE_ENVIRONMENTS = (
     "data-aip-de-s3",
     "gaia-dr3-tap-query",
     "large-tabular-visualization",
+    "muse-science-products",
     "pepsi-spectra",
     "rave-dr6",
     "seaborn-paper-plots",
@@ -87,7 +88,9 @@ def test_large_tabular_environment_covers_the_exercised_rendering_stack() -> Non
     assert "PYTHONDONTWRITEBYTECODE=1" in text
 
 
-@pytest.mark.parametrize("name", ["gaia-dr3-tap-query", "rave-dr6", "pepsi-spectra", "coseecat"])
+@pytest.mark.parametrize(
+    "name", ["gaia-dr3-tap-query", "rave-dr6", "pepsi-spectra", "coseecat", "muse-science-products"]
+)
 @pytest.mark.parametrize("installer", ["pip", "uv"])
 @pytest.mark.parametrize("existing", ["directory", "file", "symlink", "dangling-symlink"])
 def test_spectrum_setup_refuses_existing_paths_without_mutation(
@@ -128,7 +131,9 @@ def test_spectrum_setup_refuses_existing_paths_without_mutation(
         assert target.read_text(encoding="utf-8") == "preserve me"
 
 
-@pytest.mark.parametrize("name", ["gaia-dr3-tap-query", "rave-dr6", "pepsi-spectra", "coseecat"])
+@pytest.mark.parametrize(
+    "name", ["gaia-dr3-tap-query", "rave-dr6", "pepsi-spectra", "coseecat", "muse-science-products"]
+)
 def test_spectrum_helpers_pin_every_direct_third_party_import(name: str) -> None:
     skill = ROOT / "skills" / name
     text = (skill / "SKILL.md").read_text(encoding="utf-8")
