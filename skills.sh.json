@@ -25,6 +25,7 @@
       "description": "Astronomy catalog access, survey workflows, and scientific visualization.",
       "skills": [
         "astro-catalog-plotting-cache",
+        "cluster-cmd-isochrone-fit",
         "coseecat",
         "gaia-dr3-tap-query",
         "muse-science-products",

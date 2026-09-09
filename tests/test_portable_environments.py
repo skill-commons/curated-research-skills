@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILLS_WITH_PORTABLE_ENVIRONMENTS = (
     "astro-catalog-plotting-cache",
     "calculator",
+    "cluster-cmd-isochrone-fit",
     "coseecat",
     "data-aip-de-s3",
     "gaia-dr3-tap-query",
@@ -89,7 +90,15 @@ def test_large_tabular_environment_covers_the_exercised_rendering_stack() -> Non
 
 
 @pytest.mark.parametrize(
-    "name", ["gaia-dr3-tap-query", "rave-dr6", "pepsi-spectra", "coseecat", "muse-science-products"]
+    "name",
+    [
+        "gaia-dr3-tap-query",
+        "rave-dr6",
+        "pepsi-spectra",
+        "coseecat",
+        "muse-science-products",
+        "cluster-cmd-isochrone-fit",
+    ],
 )
 @pytest.mark.parametrize("installer", ["pip", "uv"])
 @pytest.mark.parametrize("existing", ["directory", "file", "symlink", "dangling-symlink"])
@@ -132,7 +141,15 @@ def test_spectrum_setup_refuses_existing_paths_without_mutation(
 
 
 @pytest.mark.parametrize(
-    "name", ["gaia-dr3-tap-query", "rave-dr6", "pepsi-spectra", "coseecat", "muse-science-products"]
+    "name",
+    [
+        "gaia-dr3-tap-query",
+        "rave-dr6",
+        "pepsi-spectra",
+        "coseecat",
+        "muse-science-products",
+        "cluster-cmd-isochrone-fit",
+    ],
 )
 def test_spectrum_helpers_pin_every_direct_third_party_import(name: str) -> None:
     skill = ROOT / "skills" / name

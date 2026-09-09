@@ -36,11 +36,12 @@ def _load_dt4acc_runner():
 
 def test_tap_contains_the_expected_skills() -> None:
     records = load_skills()
-    assert len(records) == 26
+    assert len(records) == 27
     assert {record["name"] for record in records} == {
         "arxiv",
         "astro-catalog-plotting-cache",
         "calculator",
+        "cluster-cmd-isochrone-fit",
         "coseecat",
         "data-aip-de-s3",
         "drphub-cards",

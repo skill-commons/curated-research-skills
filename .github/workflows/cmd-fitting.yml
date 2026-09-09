@@ -1,0 +1,43 @@
+name: CMD fitting science checks
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/cmd-fitting.yml"
+      - "skills/cluster-cmd-isochrone-fit/**"
+      - "tests/test_cmd_isochrone_fit.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/cmd-fitting.yml"
+      - "skills/cluster-cmd-isochrone-fit/**"
+      - "tests/test_cmd_isochrone_fit.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cmd-fitting:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: "0.10.12"
+          enable-cache: false
+      - name: Build isolated pinned science runtime
+        run: |
+          uv venv --python 3.12 "$RUNNER_TEMP/cmd-science"
+          uv pip install --python "$RUNNER_TEMP/cmd-science/bin/python" \
+            'numpy==2.5.1' 'scipy==1.18.0' 'matplotlib==3.11.1' 'pytest==8.4.2'
+          uv pip check --python "$RUNNER_TEMP/cmd-science/bin/python"
+      - name: Run offline geometric recovery and input contracts
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+          MPLBACKEND: Agg
+        run: |
+          "$RUNNER_TEMP/cmd-science/bin/python" -m pytest -q tests/test_cmd_isochrone_fit.py
