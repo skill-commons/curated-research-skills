@@ -2,7 +2,7 @@
 name: cluster-cmd-isochrone-fit
 description: Fit cluster CMD ages with stellar-evolution isochrones.
 version: 1.0.0
-author: Tiantian Tong and Skill Commons contributors
+author: Tom Tong and Skill Commons contributors
 license: MIT
 metadata:
   hermes:
@@ -137,7 +137,7 @@ population density along isochrones, binaries, field contamination, measurement
 errors and the observation-window selection. The geometric helper does not
 implement that extension; see the methodological sources in the fitting reference.
 
-The skill's original code and instructions are MIT-licensed. Model and catalogue
+The skill's original code and instructions use the bundled [MIT license](LICENSE). Model and catalogue
 data are retrieved on demand under their own terms; do not relicense them as MIT.
 Cite PARSEC, the selected bolometric corrections/passbands, the member catalogue,
 CDS/VizieR and Gaia/DPAC as specified in the references.

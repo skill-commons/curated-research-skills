@@ -399,3 +399,12 @@ def test_complete_offline_fit_records_boundaries_artifacts_and_replay(tmp_path, 
 def test_successful_http_error_or_unexpected_output_link_is_refused(raw):
     with pytest.raises(parsec.GridError):
         parsec.output_link(raw)
+
+
+def test_truncated_csv_row_is_rejected_before_field_conversion(tmp_path):
+    path = artifact(tmp_path, "stars", fit.STAR_FIELDS, [star()], "Gaia DR3")
+    lines = path.read_text().splitlines()
+    lines[1] = ",".join(lines[1].split(",")[:3])
+    path.write_text("\n".join(lines) + "\n")
+    with pytest.raises(ValueError, match="malformed CSV"):
+        fit.load_stars(path)

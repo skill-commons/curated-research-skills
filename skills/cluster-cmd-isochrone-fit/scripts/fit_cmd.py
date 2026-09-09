@@ -60,7 +60,7 @@ def read_artifact(path, fields, systems):
         if len(reader.fieldnames) != len(set(reader.fieldnames)):
             raise ValueError(f"{path}: duplicate column names")
         rows = list(reader)
-    if not rows or any(None in row for row in rows):
+    if not rows or any(None in row or any(value is None for value in row.values()) for row in rows):
         raise ValueError(f"{path}: empty or malformed CSV")
     return rows, metadata
 
