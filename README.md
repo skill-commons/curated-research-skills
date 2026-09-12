@@ -49,7 +49,7 @@ Astronomy catalog access, survey workflows, and scientific visualization.
 | Skill | Version | Description |
 |---|---:|---|
 | [`astro-catalog-plotting-cache`](skills/astro-catalog-plotting-cache/) | `2.0.1` | Create cached, publication-ready astronomy catalog plots. |
-| [`cluster-cmd-isochrone-fit`](skills/cluster-cmd-isochrone-fit/) | `1.0.0` | Fit cluster CMD ages with stellar-evolution isochrones. |
+| [`cluster-cmd-isochrone-fit`](skills/cluster-cmd-isochrone-fit/) | `1.0.1` | Fit cluster CMD ages with stellar-evolution isochrones. |
 | [`coseecat`](skills/coseecat/) | `1.0.0` | Query solar electron events and plots from CoSEE-Cat. |
 | [`gaia-dr3-tap-query`](skills/gaia-dr3-tap-query/) | `3.1.1` | Query Gaia DR3 catalogs and spectra at AIP. |
 | [`muse-science-products`](skills/muse-science-products/) | `1.0.0` | Plot published MUSE maps and H II region measurements. |

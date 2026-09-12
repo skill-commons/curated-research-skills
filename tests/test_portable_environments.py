@@ -119,6 +119,7 @@ def test_spectrum_setup_refuses_existing_paths_without_mutation(
         target.write_text("preserve me", encoding="utf-8")
     else:
         target.symlink_to(sentinel if existing == "symlink" else tmp_path / "absent")
+    link_before = target.readlink() if target.is_symlink() else None
     before = target.lstat()
 
     # Empty PATH prevents any package/network operation if the guard regresses.
@@ -134,7 +135,22 @@ def test_spectrum_setup_refuses_existing_paths_without_mutation(
 
     assert result.returncode == 1, result.stderr
     assert "Refusing existing .venv" in result.stderr
-    assert target.lstat() == before
+    after = target.lstat()
+    # Looking up a symlink may update its access time without mutating the path.
+    for field in (
+        "st_mode",
+        "st_ino",
+        "st_dev",
+        "st_nlink",
+        "st_uid",
+        "st_gid",
+        "st_size",
+        "st_mtime_ns",
+        "st_ctime_ns",
+    ):
+        assert getattr(after, field) == getattr(before, field), field
+    if link_before is not None:
+        assert target.readlink() == link_before
     assert sentinel.read_text(encoding="utf-8") == "preserve me"
     if existing == "file":
         assert target.read_text(encoding="utf-8") == "preserve me"

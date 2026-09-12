@@ -316,6 +316,37 @@ def test_parsec_preserves_physical_grid_and_refuses_wrong_passbands():
         parsec.parse_source(raw.replace(b"Gaia EDR3", b"Gaia DR2"), grid, 0.0)
 
 
+def test_parsec_bundle_emits_correct_obc_citations(tmp_path, monkeypatch):
+    grid = {"log_age": [9.0, 9.1], "mh": [0.0], "av": [0.0]}
+    output_url = "https://stev.oapd.inaf.it/tmp/output123.dat"
+
+    def download(url, parameters=None, **kwargs):
+        if url == parsec.SOURCE_URL:
+            assert parameters == parsec.query_parameters(grid, 0.0)
+            return b'<a href="../tmp/output123.dat">data</a>'
+        assert url == output_url
+        return parsec_source()
+
+    monkeypatch.setattr(parsec, "download", download)
+    path = tmp_path / "models"
+    parsec.fetch_grid(path, grid)
+    manifest_bytes = (path / "model.json").read_bytes()
+    manifest = json.loads(manifest_bytes)
+    correct = {
+        "https://doi.org/10.1051/0004-6361:20078467",
+        "https://doi.org/10.1086/588526",
+    }
+    assert correct <= set(manifest["citations"])
+    assert not {
+        "https://doi.org/10.1051/0004-6361:20079174",
+        "https://doi.org/10.1086/590733",
+    } & set(manifest["citations"])
+    references = (SCRIPTS.parent / "references/parsec.md").read_text()
+    assert all(citation in references for citation in correct)
+    assert parsec.fetch_grid(path, grid, offline=True) == manifest
+    assert (path / "model.json").read_bytes() == manifest_bytes
+
+
 def test_parsec_rounding_drift_is_normalized_without_admitting_wrong_ages():
     grid = {"log_age": [9.0, 9.1], "mh": [0.0], "av": [0.0]}
     raw = parsec_source().replace(b" 9.1 ", b" 9.10001 ")

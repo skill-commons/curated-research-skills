@@ -488,8 +488,8 @@ def fetch_grid(path, grid, offline=False):
             "https://doi.org/10.1093/mnras/stu1605",
             "https://doi.org/10.1093/mnras/stv1281",
             "https://doi.org/10.1093/mnras/stu2029",
-            "https://doi.org/10.1051/0004-6361:20079174",
-            "https://doi.org/10.1086/590733",
+            "https://doi.org/10.1051/0004-6361:20078467",
+            "https://doi.org/10.1086/588526",
             "https://doi.org/10.1051/0004-6361/202039587",
         ],
         "data_rights": (

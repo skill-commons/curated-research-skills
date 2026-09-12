@@ -161,8 +161,8 @@ Preserve the raw source headers and cite the actual model/photometry choices:
 - [Chen et al. 2014](https://doi.org/10.1093/mnras/stu1605), low-mass models;
   [Chen et al. 2015](https://doi.org/10.1093/mnras/stv1281) and
   [Tang et al. 2014](https://doi.org/10.1093/mnras/stu2029), additional tracks.
-- [Marigo et al. 2008](https://doi.org/10.1051/0004-6361:20079174) and
-  [Girardi et al. 2008](https://doi.org/10.1086/590733), OBC framework/extinction.
+- [Marigo et al. 2008](https://doi.org/10.1051/0004-6361:20078467) and
+  [Girardi et al. 2008](https://doi.org/10.1086/588526), OBC framework/extinction.
 - [Riello et al. 2021](https://doi.org/10.1051/0004-6361/202039587), Gaia EDR3 photometry.
 
 The service provides public research output. No explicit redistribution
