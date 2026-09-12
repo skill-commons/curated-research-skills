@@ -1,7 +1,7 @@
 ---
 name: cluster-cmd-isochrone-fit
 description: Fit cluster CMD ages with stellar-evolution isochrones.
-version: 1.0.0
+version: 1.0.1
 author: Tom Tong and Skill Commons contributors
 license: MIT
 metadata:
